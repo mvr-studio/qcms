@@ -1,0 +1,7 @@
+generates:
+  src/gql/operations.graphql:
+    schema: src/gql/schema.graphql
+    config:
+      depthLimit: 2
+    plugins:
+      - '@mvr-studio/graphql-codegen-plugin-schema-to-operations':

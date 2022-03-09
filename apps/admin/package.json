@@ -1,0 +1,73 @@
+{
+  "name": "qcms-admin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/react": "^1.8.6",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@fontsource/inter": "^4.5.4",
+    "@mvr-studio/chakra-theme": "^0.0.2",
+    "@mvr-studio/protochakra": "^0.1.2",
+    "@reach/router": "^1.3.4",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
+    "capitalize": "^2.0.4",
+    "focus-visible": "^5.2.0",
+    "framer-motion": "^6",
+    "pluralize": "^8.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-scripts": "5.0.0",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0",
+    "zustand": "^3.7.1"
+  },
+  "scripts": {
+    "dev": "PORT=3050 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "generate:schema": "graphql-codegen --config codegen.schema.yaml",
+    "generate:operations": "graphql-codegen --config codegen.operations.yaml",
+    "generate:sdk": "graphql-codegen --config codegen.sdk.yaml",
+    "generate": "yarn generate:schema && yarn generate:operations && yarn generate:sdk"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/schema-ast": "^2.4.1",
+    "@graphql-codegen/typescript": "^2.4.5",
+    "@graphql-codegen/typescript-graphql-request": "^4.3.7",
+    "@graphql-codegen/typescript-operations": "^2.3.2",
+    "@mvr-studio/graphql-codegen-plugin-schema-to-operations": "^0.1.1",
+    "@types/capitalize": "^2.0.0",
+    "@types/pluralize": "^0.0.29",
+    "@types/reach__router": "^1.3.10",
+    "graphql": "^16.3.0",
+    "graphql-codegen-plugin-typescript-swr": "^0.8.1",
+    "prettier": "^2.5.1"
+  }
+}

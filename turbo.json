@@ -1,0 +1,21 @@
+{
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "node_modules/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    },
+    "generate": {
+      "dependsOn": ["^build"],
+      "outputs": ["prisma/**"]
+    },
+    "studio": {
+      "dependsOn": ["^build"]
+    }
+  }
+}

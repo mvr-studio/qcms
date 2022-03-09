@@ -1,0 +1,448 @@
+query categories_query($orderBy: JSON, $skip: Int, $take: Int, $where: JSON) {
+  categories(orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
+    createdAt
+    id
+    name
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    updatedAt
+  }
+}
+
+query categoryById_query($id: String!) {
+  categoryById(id: $id) {
+    createdAt
+    id
+    name
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    updatedAt
+  }
+}
+
+query me_query {
+  me {
+    createdAt
+    email
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    role
+    updatedAt
+  }
+}
+
+query orderById_query($id: String!) {
+  orderById(id: $id) {
+    createdAt
+    id
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    state
+    updatedAt
+    user {
+      createdAt
+      email
+      id
+      name
+      role
+      updatedAt
+    }
+  }
+}
+
+query orders_query($orderBy: JSON, $skip: Int, $take: Int, $where: JSON) {
+  orders(orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
+    createdAt
+    id
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    state
+    updatedAt
+    user {
+      createdAt
+      email
+      id
+      name
+      role
+      updatedAt
+    }
+  }
+}
+
+query productById_query($id: String!) {
+  productById(id: $id) {
+    category {
+      createdAt
+      id
+      name
+      updatedAt
+    }
+    createdAt
+    description
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    price
+    updatedAt
+  }
+}
+
+query products_query($orderBy: JSON, $skip: Int, $take: Int, $where: JSON) {
+  products(orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
+    category {
+      createdAt
+      id
+      name
+      updatedAt
+    }
+    createdAt
+    description
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    price
+    updatedAt
+  }
+}
+
+query qcms_query {
+  qcms {
+    schema
+  }
+}
+
+query userById_query($id: String!) {
+  userById(id: $id) {
+    createdAt
+    email
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    role
+    updatedAt
+  }
+}
+
+query users_query {
+  users {
+    createdAt
+    email
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    role
+    updatedAt
+  }
+}
+
+mutation createCategory_mutation($data: JSON) {
+  createCategory(data: $data) {
+    createdAt
+    id
+    name
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    updatedAt
+  }
+}
+
+mutation createOrder_mutation($data: JSON) {
+  createOrder(data: $data) {
+    createdAt
+    id
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    state
+    updatedAt
+    user {
+      createdAt
+      email
+      id
+      name
+      role
+      updatedAt
+    }
+  }
+}
+
+mutation createProduct_mutation($data: JSON) {
+  createProduct(data: $data) {
+    category {
+      createdAt
+      id
+      name
+      updatedAt
+    }
+    createdAt
+    description
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    price
+    updatedAt
+  }
+}
+
+mutation createUser_mutation($data: JSON) {
+  createUser(data: $data) {
+    createdAt
+    email
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    role
+    updatedAt
+  }
+}
+
+mutation deleteCategory_mutation($id: String!) {
+  deleteCategory(id: $id) {
+    createdAt
+    id
+    name
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    updatedAt
+  }
+}
+
+mutation deleteOrder_mutation($id: String!) {
+  deleteOrder(id: $id) {
+    createdAt
+    id
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    state
+    updatedAt
+    user {
+      createdAt
+      email
+      id
+      name
+      role
+      updatedAt
+    }
+  }
+}
+
+mutation deleteProduct_mutation($id: String!) {
+  deleteProduct(id: $id) {
+    category {
+      createdAt
+      id
+      name
+      updatedAt
+    }
+    createdAt
+    description
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    price
+    updatedAt
+  }
+}
+
+mutation deleteUser_mutation($id: String!) {
+  deleteUser(id: $id) {
+    createdAt
+    email
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    role
+    updatedAt
+  }
+}
+
+mutation logInUser_mutation($email: String!, $password: String!) {
+  logInUser(email: $email, password: $password) {
+    jwt
+  }
+}
+
+mutation logOutUser_mutation {
+  logOutUser
+}
+
+mutation registerUser_mutation($email: String!, $name: String, $password: String!) {
+  registerUser(email: $email, name: $name, password: $password) {
+    jwt
+  }
+}
+
+mutation updateCategory_mutation($data: JSON, $id: String!) {
+  updateCategory(data: $data, id: $id) {
+    createdAt
+    id
+    name
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    updatedAt
+  }
+}
+
+mutation updateOrder_mutation($data: JSON, $id: String!) {
+  updateOrder(data: $data, id: $id) {
+    createdAt
+    id
+    products {
+      createdAt
+      description
+      id
+      name
+      price
+      updatedAt
+    }
+    state
+    updatedAt
+    user {
+      createdAt
+      email
+      id
+      name
+      role
+      updatedAt
+    }
+  }
+}
+
+mutation updateProduct_mutation($data: JSON, $id: String!) {
+  updateProduct(data: $data, id: $id) {
+    category {
+      createdAt
+      id
+      name
+      updatedAt
+    }
+    createdAt
+    description
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    price
+    updatedAt
+  }
+}
+
+mutation updateUser_mutation($data: JSON, $id: String!) {
+  updateUser(data: $data, id: $id) {
+    createdAt
+    email
+    id
+    name
+    orders {
+      createdAt
+      id
+      state
+      updatedAt
+    }
+    role
+    updatedAt
+  }
+}
