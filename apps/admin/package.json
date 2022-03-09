@@ -1,5 +1,5 @@
 {
-  "name": "qcms-admin",
+  "name": "@mvr-studio/qcms-admin",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,0 +1,13 @@
+{
+  "name": "@mvr-studio/qcms-sandbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "qcms:build": "yarn --cwd node_modules/@mvr-studio/qcms build",
+    "qcms:start": "yarn --cwd node_modules/@mvr-studio/qcms start"
+  },
+  "dependencies": {
+    "@mvr-studio/qcms": "file:../server"
+  }
+}

@@ -7,7 +7,11 @@ module.exports = {
           name: 'name',
           type: 'String',
           required: true,
-          validationSchema: (z) => z.string().min(3).max(64)
+          validationSchema: (z) => z.string().min(8).max(64)
+        },
+        {
+          name: 'SKU',
+          type: 'String'
         },
         { name: 'description', type: 'String' },
         { name: 'price', type: 'Int' },

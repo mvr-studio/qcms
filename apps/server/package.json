@@ -1,11 +1,11 @@
 {
-  "name": "qcms",
+  "name": "@mvr-studio/qcms",
   "author": "Tomasz Marciniak <tomek@mvr.studio>",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf ./dist && mkdir ./dist && yarn generate:db && tsc && tsc-alias",
+    "build": "rimraf ./dist && mkdir ./dist && yarn generate && tsc && tsc-alias",
     "start": "micro ./dist",
     "dev": "yarn build && concurrently \"tsc -w\" \"micro ./dist\"",
     "generate:nexus": "ts-node --transpile-only server/schema",
