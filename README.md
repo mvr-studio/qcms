@@ -1,6 +1,6 @@
 # QCMS
 
-QCMS is an experimental headless CMS ready to be tested on cloud.
+QCMS is an experimental headless CMS ready to be served in cloud.
 This is a monorepo for all the QCMS services and apps.
 
 ### Apps and Packages
