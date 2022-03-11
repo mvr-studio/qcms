@@ -6,4 +6,4 @@ dist
 prisma/schema.prisma
 server/schema.graphql
 /coverage
-qcms.config.js
+/qcms.config.js
