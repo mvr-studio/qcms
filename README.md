@@ -1,77 +1,55 @@
-# Turborepo starter
+# QCMS
 
-This is an official Yarn v1 starter turborepo.
-
-## What's inside?
-
-This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package manager. It includes the following packages/apps:
+QCMS is an experimental headless CMS ready to be tested on cloud.
+This is a monorepo for all the QCMS services and apps.
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- `admin`: an optional Admin Panel for your CMS. You can always use Prisma Studio.
+- `docs`: a CMS markdown-based Web documentation.
+- `sandbox`: a meta-application for `server` testing and development purposes.
+- `server`: a core of the CMS. This is where the magic happens.
 
 ## Setup
 
-This repository is used in the `npx create-turbo` command, and selected when choosing which package manager you wish to use with your monorepo (Yarn).
+QCMS is meant to live in peace and harmony with your (already existing) Frontend.
 
-### Build
+### Prerequisites
 
-To build all apps and packages, run the following command:
+For the QCMS' needs you need:
 
-```
-cd my-turborepo
-yarn run build
-```
+- Node.js installed
+- PostgreSQL installed (or MySQL, SQLite, Microsoft SQL Server). If you have Docker installed on your system, check our [Docker Compose example](https://google.com).
 
-### Develop
+### Installation
 
-To develop all apps and packages, run the following command:
+No matter if your app already exists or you want to start fresh, simply add the depedency:
 
 ```
-cd my-turborepo
-yarn run dev
+$ yarn add @mvr-studio/qcms # or npm i @mvr-studio/qcms
 ```
 
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching (Beta)](https://turborepo.org/docs/features/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching (Beta) you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+Next, in your app's `package.json` you should add following scripts:
 
 ```
-cd my-turborepo
-npx turbo login
+"qcms:build": "yarn --cwd node_modules/@mvr-studio/qcms local:build",
+"qcms:start": "yarn --cwd node_modules/@mvr-studio/qcms local:start",
+"qcms:studio": "yarn --cwd node_modules/@mvr-studio/qcms local:studio"
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+Then, create the `qcms.config.js` configuration. For referrence, check our [examples/](https://google.com) or visit [our documentation](https://google.com).
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
+Finally, run:
 
 ```
-npx turbo link
+$ yarn qcms:build
+$ yarn qcms:start
 ```
 
 ## Useful Links
 
 Learn more about the power of Turborepo:
 
-- [Pipelines](https://turborepo.org/docs/features/pipelines)
-- [Caching](https://turborepo.org/docs/features/caching)
-- [Remote Caching (Beta)](https://turborepo.org/docs/features/remote-caching)
-- [Scoped Tasks](https://turborepo.org/docs/features/scopes)
-- [Configuration Options](https://turborepo.org/docs/reference/configuration)
-- [CLI Usage](https://turborepo.org/docs/reference/command-line-reference)
+- [Documentation](https://google.com)
+
+Created and maintained by [MVR Studio](https://mvr.studio/)
