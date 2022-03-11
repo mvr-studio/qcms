@@ -10,5 +10,5 @@
     "outDir": "./dist",
     "declaration": true
   },
-  "include": ["./server", "./custom.d.ts"]
+  "include": ["./src", "./custom.d.ts"]
 }

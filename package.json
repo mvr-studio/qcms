@@ -1,5 +1,5 @@
 {
-  "name": "qcms-shared",
+  "name": "qcms",
   "version": "0.0.1",
   "private": true,
   "workspaces": [
@@ -7,12 +7,11 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
+    "build": "turbo run build --ignore=\"apps/server\"",
+    "dev": "turbo run dev --parallel --ignore=\"apps/server\"",
     "lint": "turbo run lint",
     "generate": "turbo run generate",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "studio": "turbo run studio"
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "prettier": "^2.5.1",

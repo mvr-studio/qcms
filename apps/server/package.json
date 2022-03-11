@@ -5,15 +5,17 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf ./dist && mkdir ./dist && yarn generate && tsc && tsc-alias",
-    "start": "micro ./dist",
-    "dev": "yarn build && concurrently \"tsc -w\" \"micro ./dist\"",
-    "generate:nexus": "ts-node --transpile-only server/schema",
-    "generate:schema": "chmod +x dist/prepare.js && dist/prepare.js && npx prisma format",
-    "generate:db": "cp -r ./prisma ./dist/prisma && npx prisma db push",
-    "generate": "yarn generate:nexus && yarn generate:schema",
-    "test:unit": "jest",
-    "studio": "npx prisma studio"
+    "local:build": "yarn clear:dist && tsc && tsc-alias && yarn generate",
+    "local:start": "micro ./dist",
+    "local:dev": "yarn build && nodemon -e ts -x \"tsc && tsc-alias && micro-dev --cold ./dist\"",
+    "local:studio": "npx prisma studio",
+    "generate:nexus": "ts-node --transpile-only src/schema",
+    "generate:copydist": "cp -r ./src/prisma ./dist/prisma",
+    "generate:schema": "chmod +x ./dist/prepare.js && ./dist/prepare.js && npx prisma format",
+    "generate:db": "npx prisma db push",
+    "generate": "yarn generate:nexus && yarn generate:copydist && yarn generate:schema && yarn generate:db",
+    "clear:dist": "rimraf ./dist && mkdir ./dist",
+    "test:unit": "jest"
   },
   "dependencies": {
     "@prisma/client": "^3.10.0",
@@ -52,6 +54,8 @@
     "@types/write": "^2.0.1",
     "concurrently": "^7.0.0",
     "jest": "^27.5.1",
+    "micro-dev": "^3.0.0",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.3",
@@ -65,7 +69,7 @@
     "trailingComma": "none"
   },
   "prisma": {
-    "schema": "dist/prisma/schema.prisma"
+    "schema": "./dist/prisma/schema.prisma"
   },
   "jest": {
     "transform": {

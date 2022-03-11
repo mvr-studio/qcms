@@ -54,29 +54,19 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // String!
     name?: string | null; // String
-    products?: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    posts?: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   CmsInfo: { // root type
     schema?: NexusGenScalars['JSON'] | null; // JSON
   }
   Mutation: {};
-  Order: { // root type
+  Post: { // root type
+    categories?: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    content?: string | null; // String
     createdAt: NexusGenScalars['Date']; // Date!
-    id: string; // String!
-    products?: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
-    state?: string | null; // String
-    updatedAt: NexusGenScalars['Date']; // Date!
-    user?: NexusGenRootTypes['User'] | null; // User
-  }
-  Product: { // root type
-    category?: NexusGenRootTypes['Category'] | null; // Category
-    createdAt: NexusGenScalars['Date']; // Date!
-    description?: string | null; // String
     id: string; // String!
     name?: string | null; // String
-    orders?: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
-    price?: number | null; // Int
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   Query: {};
@@ -85,7 +75,6 @@ export interface NexusGenObjects {
     email: string; // String!
     id: string; // String!
     name?: string | null; // String
-    orders?: NexusGenRootTypes['Order'] | null; // Order
     role?: NexusGenEnums['Role'] | null; // Role
     updatedAt: NexusGenScalars['Date']; // Date!
   }
@@ -109,7 +98,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // String!
     name: string | null; // String
-    products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   CmsInfo: { // field return type
@@ -117,47 +106,32 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createCategory: NexusGenRootTypes['Category'] | null; // Category
-    createOrder: NexusGenRootTypes['Order'] | null; // Order
-    createProduct: NexusGenRootTypes['Product'] | null; // Product
+    createPost: NexusGenRootTypes['Post'] | null; // Post
     createUser: NexusGenRootTypes['User'] | null; // User
     deleteCategory: NexusGenRootTypes['Category'] | null; // Category
-    deleteOrder: NexusGenRootTypes['Order'] | null; // Order
-    deleteProduct: NexusGenRootTypes['Product'] | null; // Product
+    deletePost: NexusGenRootTypes['Post'] | null; // Post
     deleteUser: NexusGenRootTypes['User'] | null; // User
     logInUser: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
     logOutUser: NexusGenScalars['JSON'] | null; // JSON
     registerUser: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
     updateCategory: NexusGenRootTypes['Category'] | null; // Category
-    updateOrder: NexusGenRootTypes['Order'] | null; // Order
-    updateProduct: NexusGenRootTypes['Product'] | null; // Product
+    updatePost: NexusGenRootTypes['Post'] | null; // Post
     updateUser: NexusGenRootTypes['User'] | null; // User
   }
-  Order: { // field return type
+  Post: { // field return type
+    categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    content: string | null; // String
     createdAt: NexusGenScalars['Date']; // Date!
-    id: string; // String!
-    products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
-    state: string | null; // String
-    updatedAt: NexusGenScalars['Date']; // Date!
-    user: NexusGenRootTypes['User'] | null; // User
-  }
-  Product: { // field return type
-    category: NexusGenRootTypes['Category'] | null; // Category
-    createdAt: NexusGenScalars['Date']; // Date!
-    description: string | null; // String
     id: string; // String!
     name: string | null; // String
-    orders: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
-    price: number | null; // Int
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   Query: { // field return type
     categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
     categoryById: NexusGenRootTypes['Category'] | null; // Category
     me: NexusGenRootTypes['User'] | null; // User
-    orderById: NexusGenRootTypes['Order'] | null; // Order
-    orders: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
-    productById: NexusGenRootTypes['Product'] | null; // Product
-    products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    postById: NexusGenRootTypes['Post'] | null; // Post
+    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
     qcms: NexusGenRootTypes['CmsInfo'] | null; // CmsInfo
     userById: NexusGenRootTypes['User'] | null; // User
     users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
@@ -167,7 +141,6 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // String!
     name: string | null; // String
-    orders: NexusGenRootTypes['Order'] | null; // Order
     role: NexusGenEnums['Role'] | null; // Role
     updatedAt: NexusGenScalars['Date']; // Date!
   }
@@ -181,7 +154,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'Date'
     id: 'String'
     name: 'String'
-    products: 'Product'
+    posts: 'Post'
     updatedAt: 'Date'
   }
   CmsInfo: { // field return type name
@@ -189,47 +162,32 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createCategory: 'Category'
-    createOrder: 'Order'
-    createProduct: 'Product'
+    createPost: 'Post'
     createUser: 'User'
     deleteCategory: 'Category'
-    deleteOrder: 'Order'
-    deleteProduct: 'Product'
+    deletePost: 'Post'
     deleteUser: 'User'
     logInUser: 'AuthResponse'
     logOutUser: 'JSON'
     registerUser: 'AuthResponse'
     updateCategory: 'Category'
-    updateOrder: 'Order'
-    updateProduct: 'Product'
+    updatePost: 'Post'
     updateUser: 'User'
   }
-  Order: { // field return type name
+  Post: { // field return type name
+    categories: 'Category'
+    content: 'String'
     createdAt: 'Date'
-    id: 'String'
-    products: 'Product'
-    state: 'String'
-    updatedAt: 'Date'
-    user: 'User'
-  }
-  Product: { // field return type name
-    category: 'Category'
-    createdAt: 'Date'
-    description: 'String'
     id: 'String'
     name: 'String'
-    orders: 'Order'
-    price: 'Int'
     updatedAt: 'Date'
   }
   Query: { // field return type name
     categories: 'Category'
     categoryById: 'Category'
     me: 'User'
-    orderById: 'Order'
-    orders: 'Order'
-    productById: 'Product'
-    products: 'Product'
+    postById: 'Post'
+    posts: 'Post'
     qcms: 'CmsInfo'
     userById: 'User'
     users: 'User'
@@ -239,7 +197,6 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     id: 'String'
     name: 'String'
-    orders: 'Order'
     role: 'Role'
     updatedAt: 'Date'
   }
@@ -250,10 +207,7 @@ export interface NexusGenArgTypes {
     createCategory: { // args
       data?: NexusGenScalars['JSON'] | null; // JSON
     }
-    createOrder: { // args
-      data?: NexusGenScalars['JSON'] | null; // JSON
-    }
-    createProduct: { // args
+    createPost: { // args
       data?: NexusGenScalars['JSON'] | null; // JSON
     }
     createUser: { // args
@@ -262,10 +216,7 @@ export interface NexusGenArgTypes {
     deleteCategory: { // args
       id: string; // String!
     }
-    deleteOrder: { // args
-      id: string; // String!
-    }
-    deleteProduct: { // args
+    deletePost: { // args
       id: string; // String!
     }
     deleteUser: { // args
@@ -284,11 +235,7 @@ export interface NexusGenArgTypes {
       data?: NexusGenScalars['JSON'] | null; // JSON
       id: string; // String!
     }
-    updateOrder: { // args
-      data?: NexusGenScalars['JSON'] | null; // JSON
-      id: string; // String!
-    }
-    updateProduct: { // args
+    updatePost: { // args
       data?: NexusGenScalars['JSON'] | null; // JSON
       id: string; // String!
     }
@@ -307,19 +254,10 @@ export interface NexusGenArgTypes {
     categoryById: { // args
       id: string; // String!
     }
-    orderById: { // args
+    postById: { // args
       id: string; // String!
     }
-    orders: { // args
-      orderBy?: NexusGenScalars['JSON'] | null; // JSON
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenScalars['JSON'] | null; // JSON
-    }
-    productById: { // args
-      id: string; // String!
-    }
-    products: { // args
+    posts: { // args
       orderBy?: NexusGenScalars['JSON'] | null; // JSON
       skip?: number | null; // Int
       take?: number | null; // Int

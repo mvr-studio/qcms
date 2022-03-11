@@ -13,9 +13,6 @@
     "generate": {
       "dependsOn": ["^build"],
       "outputs": ["prisma/**"]
-    },
-    "studio": {
-      "dependsOn": ["^build"]
     }
   }
 }

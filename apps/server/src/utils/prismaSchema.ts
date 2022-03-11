@@ -10,7 +10,7 @@ const dateFieldsTemplate = dedent`
 `
 
 const getSchemaTemplate = () => {
-  return readFile('../../prisma/schema.template.prisma')
+  return readFile('../prisma/schema.template.prisma')
 }
 
 const getFieldTemplate = (field: any) => {
@@ -88,7 +88,7 @@ export const buildSchema = () => {
   const schema = schemaTemplate
     .replace('//AUTO', modelsTemplate)
     .replace('//USER_RELATIONS', userRelations)
-  return writeFile('../../prisma/schema.prisma', schema)
+  return writeFile('../prisma/schema.prisma', schema)
 }
 
 // buildSchema()
