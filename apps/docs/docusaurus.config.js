@@ -50,7 +50,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'introduction/motivation',
+            docId: 'introduction/installation',
             position: 'left',
             label: 'Docs'
           },
@@ -92,7 +92,7 @@ const config = {
             ]
           }
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} QCMS by MVR Studio`
+        copyright: `Copyright © ${new Date().getFullYear()} QCMS by <a href="https://mvr.studio" target="_blank">MVR Studio</a>`
       },
       prism: {
         theme: lightCodeTheme,

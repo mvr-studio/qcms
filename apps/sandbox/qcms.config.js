@@ -1,4 +1,7 @@
-module.exports = {
+// @ts-check
+
+/** @type {import('@mvr-studio/qcms/src/types').QcmsConfig} */
+const config = {
   name: 'qcms',
   schema: {
     product: {
@@ -82,3 +85,5 @@ module.exports = {
     }
   }
 }
+
+module.exports = config
