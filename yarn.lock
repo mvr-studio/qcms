@@ -3445,7 +3445,7 @@
     web-vitals "^1.0.1"
 
 "@mvr-studio/qcms@file:apps/server":
-  version "1.0.0"
+  version "0.0.2"
   dependencies:
     "@prisma/client" "^3.10.0"
     "@vercel/node" "^1.13.0"
@@ -3467,6 +3467,8 @@
     micro-cors "^0.1.1"
     nexus "^1.2.0"
     pluralize "^8.0.0"
+    ts-node "^10.5.0"
+    typescript "^4.5.5"
     write "^2.0.0"
     zod "^3.13.2"
 
@@ -4703,7 +4705,7 @@
 
 "@typescript-eslint/eslint-plugin@^5.14.0", "@typescript-eslint/eslint-plugin@^5.5.0":
   version "5.14.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.14.0.tgz#5119b67152356231a0e24b998035288a9cd21335"
+  resolved "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.14.0.tgz"
   integrity sha512-ir0wYI4FfFUDfLcuwKzIH7sMVA+db7WYen47iRSaCGl+HMAZI9fpBwfDo45ZALD3A45ZGyHWDNLhbg8tZrMX4w==
   dependencies:
     "@typescript-eslint/scope-manager" "5.14.0"
@@ -4758,7 +4760,7 @@
 
 "@typescript-eslint/parser@^5.14.0", "@typescript-eslint/parser@^5.5.0":
   version "5.14.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-5.14.0.tgz#7c79f898aa3cff0ceee6f1d34eeed0f034fb9ef3"
+  resolved "https://registry.npmjs.org/@typescript-eslint/parser/-/parser-5.14.0.tgz"
   integrity sha512-aHJN8/FuIy1Zvqk4U/gcO/fxeMKyoSv/rS46UXMXOJKVsLQ+iYPuXNbpbH7cBLcpSbmyyFbwrniLx5+kutu1pw==
   dependencies:
     "@typescript-eslint/scope-manager" "5.14.0"
@@ -8659,10 +8661,25 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv-cli@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/dotenv-cli/-/dotenv-cli-5.0.0.tgz"
+  integrity sha512-0Cb2WMDJ805hTD7m43gXXFLraoE5KwrKmGW2dAzYvSEB96tlKI2hmcJ/9In4s2FfvkAFk3SjNQcLeKLoRSXhKA==
+  dependencies:
+    cross-spawn "^7.0.3"
+    dotenv "^16.0.0"
+    dotenv-expand "^8.0.1"
+    minimist "^1.2.5"
+
 dotenv-expand@5.1.0, dotenv-expand@^5.1.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/dotenv-expand/-/dotenv-expand-5.1.0.tgz"
   integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
+dotenv-expand@^8.0.1:
+  version "8.0.2"
+  resolved "https://registry.npmjs.org/dotenv-expand/-/dotenv-expand-8.0.2.tgz"
+  integrity sha512-vKKAk+VOzAWOV/dPIeSYqhgC/TQY+6L6Ibkzfsr8xd1stdBsTuGu9asCOXgbYbBeS+f2Y6lqqEuw7riOA+xEUQ==
 
 dotenv@5.0.1:
   version "5.0.1"
@@ -8983,7 +9000,7 @@ escodegen@^2.0.0:
 
 eslint-config-prettier@^8.5.0:
   version "8.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
+  resolved "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz"
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
 eslint-config-react-app@^6.0.0:
@@ -9098,7 +9115,7 @@ eslint-plugin-jsx-a11y@^6.3.1, eslint-plugin-jsx-a11y@^6.5.1:
 
 eslint-plugin-prettier@^4.0.0:
   version "4.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-4.0.0.tgz#8b99d1e4b8b24a762472b4567992023619cb98e0"
+  resolved "https://registry.npmjs.org/eslint-plugin-prettier/-/eslint-plugin-prettier-4.0.0.tgz"
   integrity sha512-98MqmCJ7vJodoQK359bqQWaxOE0CS8paAz/GgjaZLyex4TTk3g9HugoO89EqWCrFiOqn9EVvcoo7gZzONCWVwQ==
   dependencies:
     prettier-linter-helpers "^1.0.0"
@@ -9705,7 +9722,7 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
 
 fast-diff@^1.1.2:
   version "1.2.0"
-  resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
+  resolved "https://registry.npmjs.org/fast-diff/-/fast-diff-1.2.0.tgz"
   integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
 fast-glob@^3.1.1, fast-glob@^3.2.11, fast-glob@^3.2.7, fast-glob@^3.2.9:
@@ -16478,7 +16495,7 @@ preserve@^0.2.0:
 
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
+  resolved "https://registry.npmjs.org/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz"
   integrity sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==
   dependencies:
     fast-diff "^1.1.2"
@@ -19645,7 +19662,7 @@ turbo-windows-64@1.1.6:
 
 turbo@latest:
   version "1.1.6"
-  resolved "https://registry.npmjs.org/turbo/-/turbo-1.1.6.tgz"
+  resolved "https://registry.yarnpkg.com/turbo/-/turbo-1.1.6.tgz#dcae11bbd7a465473bdf416b82caac2b7f94d641"
   integrity sha512-pZTc6Sb5MtK/X/qhiDSssc8AZWoUoYf14ZqYjvDWg/aEtqgwYorVJqfRcj4XOXOqtVZ3gO/91eXwdyh/q2aQHA==
   optionalDependencies:
     turbo-darwin-64 "1.1.6"

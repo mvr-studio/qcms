@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "qcms:build": "yarn --cwd node_modules/@mvr-studio/qcms local:build",
-    "qcms:start": "yarn --cwd node_modules/@mvr-studio/qcms local:start",
-    "qcms:studio": "yarn --cwd node_modules/@mvr-studio/qcms local:studio",
+    "qcms:start": "dotenv -- yarn --cwd node_modules/@mvr-studio/qcms local:start",
+    "qcms:studio": "dotenv -- yarn --cwd node_modules/@mvr-studio/qcms local:studio",
+    "qcms:generate": "dotenv -- yarn --cwd node_modules/@mvr-studio/qcms generate",
     "qcms:dev": "nodemon -w qcms.config.js -x \"yarn qcms:build && yarn qcms:start\"",
     "build": "yarn qcms:start",
     "start": "yarn qcms:start"
@@ -15,6 +15,7 @@
     "@mvr-studio/qcms": "file:../server"
   },
   "devDependencies": {
+    "dotenv-cli": "^5.0.0",
     "nodemon": "^2.0.15"
   }
 }
