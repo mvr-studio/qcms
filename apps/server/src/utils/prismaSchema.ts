@@ -69,6 +69,7 @@ const buildModels = () => {
 }
 
 export const getUserRelations = () =>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.entries(config.schema).filter(([_, objectDefinition]) =>
     objectDefinition.fields.some((field) => field.model === 'User')
   )
@@ -90,5 +91,3 @@ export const buildSchema = () => {
     .replace('//USER_RELATIONS', userRelations)
   return writeFile('../prisma/schema.prisma', schema)
 }
-
-// buildSchema()

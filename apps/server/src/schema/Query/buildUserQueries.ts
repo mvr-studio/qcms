@@ -1,4 +1,4 @@
-import { nonNull, stringArg } from 'nexus'
+import { arg, intArg, nonNull, objectType, stringArg } from 'nexus'
 import { QueryBlock } from '../../types'
 import { USER_ROLES } from '../../constants'
 
@@ -38,13 +38,49 @@ const userById = (t: QueryBlock) => {
 }
 
 const users = (t: QueryBlock) => {
-  t.list.field('users', {
-    type: 'User',
+  const LIST_LENGTH = 10
+  const UsersRelayed = objectType({
+    name: 'UsersRelayed',
+    definition(t: any) {
+      t.field('pageInfo', { type: 'PageInfo' })
+      t.list.field('edges', { type: 'User' })
+    }
+  })
+  t.field('users', {
+    type: UsersRelayed,
+    args: {
+      where: arg({ type: 'JSON' }),
+      orderBy: arg({ type: 'JSON' }),
+      skip: intArg({ default: 0 }),
+      take: intArg({ default: LIST_LENGTH })
+    },
     authorize(_root, _args, context) {
       return context.user?.role === USER_ROLES.ADMIN
     },
-    resolve(_parents, _args, context) {
-      return context.prisma.user.findMany()
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    async resolve(_parents, args, context) {
+      const SKIP = args.skip || 0
+      const TAKE = args.take || LIST_LENGTH
+      const usersCount = await context.prisma.user.count()
+      const edges = await context.prisma.user.findMany({
+        where: args.where,
+        orderBy: args.orderBy,
+        skip: args.skip || 0,
+        take: args.take || LIST_LENGTH
+      })
+      const pageInfo = {
+        hasNextPage: SKIP + TAKE < usersCount,
+        hasPreviousPage: SKIP > 0,
+        startCursor: args.skip,
+        endCursor: SKIP + TAKE,
+        endPage: Math.ceil(usersCount / TAKE),
+        currentPage: Math.ceil(usersCount - SKIP / TAKE)
+      }
+      return {
+        edges,
+        pageInfo
+      }
     }
   })
 }

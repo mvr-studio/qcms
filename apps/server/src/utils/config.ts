@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { QcmsConfig } from '../types'
 import findUp from 'find-up'
 import { CONFIG_FILES } from '../constants'

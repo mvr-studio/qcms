@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import fs from 'fs'
 import path from 'path'
 const write = require('write')

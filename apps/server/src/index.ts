@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
 const cors = require('micro-cors')({ origin: 'http://localhost:3050' })
 import { ApolloServer } from 'apollo-server-micro'
@@ -9,9 +10,7 @@ import {
 import schema from './schema'
 import { context } from './context'
 import { ZodError } from 'zod'
-// @ts-ignore
 import httpHeadersPlugin from 'apollo-server-plugin-http-headers'
-// @ts-ignore
 import cookieParse from 'micro-cookie'
 
 const apolloServer = new ApolloServer({

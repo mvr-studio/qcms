@@ -6,11 +6,16 @@ type AuthResponse {
   jwt: String!
 }
 
+type CategoriesRelayed {
+  edges: [Category]
+  pageInfo: PageInfo
+}
+
 type Category {
   createdAt: Date!
   id: String!
   name: String
-  posts: [Post]
+  products: [Product]
   updatedAt: Date!
 }
 
@@ -30,37 +35,73 @@ scalar JSON
 
 type Mutation {
   createCategory(data: JSON): Category
-  createPost(data: JSON): Post
+  createOrder(data: JSON): Order
+  createProduct(data: JSON): Product
   createUser(data: JSON): User
   deleteCategory(id: String!): Category
-  deletePost(id: String!): Post
+  deleteOrder(id: String!): Order
+  deleteProduct(id: String!): Product
   deleteUser(id: String!): User
   logInUser(email: String!, password: String!): AuthResponse
   logOutUser: JSON
   registerUser(email: String!, name: String, password: String!): AuthResponse
   updateCategory(data: JSON, id: String!): Category
-  updatePost(data: JSON, id: String!): Post
+  updateOrder(data: JSON, id: String!): Order
+  updateProduct(data: JSON, id: String!): Product
   updateUser(data: JSON, id: String!): User
 }
 
-type Post {
-  categories: [Category]
-  content: String
+type Order {
   createdAt: Date!
   id: String!
+  products: [Product]
+  state: String
+  updatedAt: Date!
+  user: User
+}
+
+type OrdersRelayed {
+  edges: [Order]
+  pageInfo: PageInfo
+}
+
+type PageInfo {
+  currentPage: Int!
+  endCursor: Int!
+  endPage: Int!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: Int!
+}
+
+type Product {
+  SKU: String
+  category: Category
+  createdAt: Date!
+  description: String
+  id: String!
   name: String
+  orders: [Order]
+  price: Int
   updatedAt: Date!
 }
 
+type ProductsRelayed {
+  edges: [Product]
+  pageInfo: PageInfo
+}
+
 type Query {
-  categories(orderBy: JSON, skip: Int, take: Int, where: JSON): [Category]
+  categories(orderBy: JSON, skip: Int = 0, take: Int = 10, where: JSON): CategoriesRelayed
   categoryById(id: String!): Category
   me: User
-  postById(id: String!): Post
-  posts(orderBy: JSON, skip: Int, take: Int, where: JSON): [Post]
+  orderById(id: String!): Order
+  orders(orderBy: JSON, skip: Int = 0, take: Int = 10, where: JSON): OrdersRelayed
+  productById(id: String!): Product
+  products(orderBy: JSON, skip: Int = 0, take: Int = 10, where: JSON): ProductsRelayed
   qcms: CmsInfo
   userById(id: String!): User
-  users: [User]
+  users(orderBy: JSON, skip: Int = 0, take: Int = 10, where: JSON): UsersRelayed
 }
 
 enum Role {
@@ -73,6 +114,12 @@ type User {
   email: String!
   id: String!
   name: String
+  orders: Order
   role: Role
   updatedAt: Date!
+}
+
+type UsersRelayed {
+  edges: [User]
+  pageInfo: PageInfo
 }

@@ -7,7 +7,7 @@
   "scripts": {
     "local:build": "yarn clear:dist && tsc && tsc-alias && yarn generate",
     "local:start": "micro ./dist",
-    "local:dev": "yarn build && nodemon -e ts -x \"tsc && tsc-alias && micro-dev --cold ./dist\"",
+    "local:dev": "yarn local:build && nodemon -e ts -x \"tsc && tsc-alias && micro-dev --cold ./dist\"",
     "local:studio": "npx prisma studio",
     "generate:nexus": "ts-node --transpile-only src/schema",
     "generate:copydist": "cp -r ./src/prisma ./dist/prisma",
@@ -15,7 +15,8 @@
     "generate:db": "npx prisma db push",
     "generate": "yarn generate:nexus && yarn generate:copydist && yarn generate:schema && yarn generate:db",
     "clear:dist": "rimraf ./dist && mkdir ./dist",
-    "test:unit": "jest"
+    "test:unit": "jest",
+    "lint": "eslint . --ext .ts"
   },
   "dependencies": {
     "@prisma/client": "^3.10.0",

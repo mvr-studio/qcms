@@ -1,0 +1,10 @@
+{
+  "ignorePatterns": ["node_modules/", "dist/", "**/*.d.ts", "**/*.spec.ts", "**/generated/nexus.ts"],
+  "extends": ["plugin:prettier/recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"]
+  }
+}

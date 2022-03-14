@@ -1,39 +1,45 @@
 import prisma from './utils/prisma'
 import type { PrismaClient, User } from '@prisma/client'
 import { decodeToken } from './utils/auth'
+import { VercelRequest } from '@vercel/node'
+import { Maybe } from 'nexus/dist/core'
 
 export interface Context {
   prisma: PrismaClient
   session: {
-    data?: User | null
+    data?: Maybe<User>
   }
-  user: User | null
+  user: Maybe<User>
   setCookies: Array<any>
   setHeaders: Array<any>
 }
 
-export const context = async ({ req }: any): Promise<Context> => {
+interface ContextProps {
+  req: VercelRequest
+}
+
+export const context = async ({ req }: ContextProps): Promise<Context> => {
+  let user: Maybe<User> = null
   const authHeader =
     req.cookies?.['Q-AUTHENTICATION'] || req.headers.authorization
-  const session =
-    authHeader &&
+  const session = (authHeader &&
     authHeader !== 'null' &&
-    (decodeToken(authHeader) as User | null)
-  let user: User | null = null
+    decodeToken(authHeader)) || { data: null as Maybe<User> }
   try {
     user =
-      session &&
-      (await prisma.user.findUnique({
-        where: {
-          id: session.data.id
-        }
-      }))
+      (session?.data &&
+        (await prisma.user.findUnique({
+          where: {
+            id: (session.data as User)?.id
+          }
+        }))) ||
+      null
   } catch {}
   return {
     prisma,
     session,
     user,
-    setCookies: new Array(),
-    setHeaders: new Array()
+    setCookies: [],
+    setHeaders: []
   }
 }

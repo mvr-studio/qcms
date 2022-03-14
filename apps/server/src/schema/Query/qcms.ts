@@ -10,7 +10,7 @@ const qcms = (t: QueryBlock) => {
     authorize(_root, _args, context) {
       return context.user?.role === USER_ROLES.ADMIN
     },
-    resolve(_parents, _args, _context) {
+    resolve() {
       const schema: Record<string, any> = Object.fromEntries(
         Object.entries(config.schema).map(([objectName, objectDefinition]) => [
           objectName,

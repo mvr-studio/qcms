@@ -1,4 +1,4 @@
-import { arg, intArg, nonNull, stringArg } from 'nexus'
+import { arg, intArg, nonNull, objectType, stringArg } from 'nexus'
 import pluralize from 'pluralize'
 import capitalize from '../../utils/capitalize'
 import config from '../../utils/config'
@@ -27,31 +27,54 @@ const autoFindAllQuery = ({
   objectName,
   objectDefinition
 }: AutoBlock<QueryBlock>) => {
+  const LIST_LENGTH = 10
+  const ObjectRelayed = objectType({
+    name: `${capitalize(pluralize(objectName))}Relayed`,
+    definition(t: any) {
+      t.field('pageInfo', { type: 'PageInfo' })
+      t.list.field('edges', { type: capitalize(objectName) as any })
+    }
+  })
   const FIND_ALL_NAME = getOperationsNames(objectName).findAll
-  t.list.field(FIND_ALL_NAME, {
-    type: capitalize(objectName) as any,
+  t.field(FIND_ALL_NAME, {
+    type: ObjectRelayed,
     args: {
       where: arg({ type: 'JSON' }),
       orderBy: arg({ type: 'JSON' }),
-      skip: intArg(),
-      take: intArg()
+      skip: intArg({ default: 0 }),
+      take: intArg({ default: LIST_LENGTH })
     },
     async authorize(_parents, _args, context: Context) {
       if (!objectDefinition.permissions?.findAll) return true
       return resolvePermissions({
         permissionsResolver: objectDefinition.permissions?.findAll,
-        user: context.session?.data
+        user: context.user
       })
     },
-    resolve(_parents, args, context: Context) {
+    async resolve(_parents, args, context: Context) {
+      const SKIP = args.skip || 0
+      const TAKE = args.take || LIST_LENGTH
       const prismaObject = (context.prisma as any)?.[objectName]
-      return prismaObject.findMany({
+      const objectsCount = await prismaObject.count()
+      const edges = await prismaObject.findMany({
         where: args.where,
         orderBy: args.orderBy,
         skip: args.skip,
         take: args.take,
         include: getRelations(objectDefinition)
       })
+      const pageInfo = {
+        hasNextPage: SKIP + TAKE < objectsCount,
+        hasPreviousPage: SKIP > 0,
+        startCursor: args.skip,
+        endCursor: SKIP + TAKE,
+        endPage: Math.ceil(objectsCount / TAKE),
+        currentPage: Math.ceil(objectsCount - SKIP / TAKE)
+      }
+      return {
+        edges,
+        pageInfo
+      }
     }
   })
 }
@@ -77,7 +100,7 @@ const autoFindOneQuery = ({
       })
       return resolvePermissions({
         permissionsResolver: objectDefinition.permissions?.findOne,
-        user: context.session?.data,
+        user: context.user,
         entity
       })
     },

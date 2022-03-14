@@ -50,24 +50,55 @@ export interface NexusGenObjects {
   AuthResponse: { // root type
     jwt: string; // String!
   }
+  CategoriesRelayed: { // root type
+    edges?: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    pageInfo?: NexusGenRootTypes['PageInfo'] | null; // PageInfo
+  }
   Category: { // root type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // String!
     name?: string | null; // String
-    posts?: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    products?: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   CmsInfo: { // root type
     schema?: NexusGenScalars['JSON'] | null; // JSON
   }
   Mutation: {};
-  Post: { // root type
-    categories?: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
-    content?: string | null; // String
+  Order: { // root type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // String!
-    name?: string | null; // String
+    products?: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    state?: string | null; // String
     updatedAt: NexusGenScalars['Date']; // Date!
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
+  OrdersRelayed: { // root type
+    edges?: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    pageInfo?: NexusGenRootTypes['PageInfo'] | null; // PageInfo
+  }
+  PageInfo: { // root type
+    currentPage: number; // Int!
+    endCursor: number; // Int!
+    endPage: number; // Int!
+    hasNextPage: boolean; // Boolean!
+    hasPreviousPage: boolean; // Boolean!
+    startCursor: number; // Int!
+  }
+  Product: { // root type
+    SKU?: string | null; // String
+    category?: NexusGenRootTypes['Category'] | null; // Category
+    createdAt: NexusGenScalars['Date']; // Date!
+    description?: string | null; // String
+    id: string; // String!
+    name?: string | null; // String
+    orders?: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    price?: number | null; // Int
+    updatedAt: NexusGenScalars['Date']; // Date!
+  }
+  ProductsRelayed: { // root type
+    edges?: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    pageInfo?: NexusGenRootTypes['PageInfo'] | null; // PageInfo
   }
   Query: {};
   User: { // root type
@@ -75,8 +106,13 @@ export interface NexusGenObjects {
     email: string; // String!
     id: string; // String!
     name?: string | null; // String
+    orders?: NexusGenRootTypes['Order'] | null; // Order
     role?: NexusGenEnums['Role'] | null; // Role
     updatedAt: NexusGenScalars['Date']; // Date!
+  }
+  UsersRelayed: { // root type
+    edges?: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    pageInfo?: NexusGenRootTypes['PageInfo'] | null; // PageInfo
   }
 }
 
@@ -94,11 +130,15 @@ export interface NexusGenFieldTypes {
   AuthResponse: { // field return type
     jwt: string; // String!
   }
+  CategoriesRelayed: { // field return type
+    edges: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    pageInfo: NexusGenRootTypes['PageInfo'] | null; // PageInfo
+  }
   Category: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // String!
     name: string | null; // String
-    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   CmsInfo: { // field return type
@@ -106,43 +146,80 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createCategory: NexusGenRootTypes['Category'] | null; // Category
-    createPost: NexusGenRootTypes['Post'] | null; // Post
+    createOrder: NexusGenRootTypes['Order'] | null; // Order
+    createProduct: NexusGenRootTypes['Product'] | null; // Product
     createUser: NexusGenRootTypes['User'] | null; // User
     deleteCategory: NexusGenRootTypes['Category'] | null; // Category
-    deletePost: NexusGenRootTypes['Post'] | null; // Post
+    deleteOrder: NexusGenRootTypes['Order'] | null; // Order
+    deleteProduct: NexusGenRootTypes['Product'] | null; // Product
     deleteUser: NexusGenRootTypes['User'] | null; // User
     logInUser: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
     logOutUser: NexusGenScalars['JSON'] | null; // JSON
     registerUser: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
     updateCategory: NexusGenRootTypes['Category'] | null; // Category
-    updatePost: NexusGenRootTypes['Post'] | null; // Post
+    updateOrder: NexusGenRootTypes['Order'] | null; // Order
+    updateProduct: NexusGenRootTypes['Product'] | null; // Product
     updateUser: NexusGenRootTypes['User'] | null; // User
   }
-  Post: { // field return type
-    categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
-    content: string | null; // String
+  Order: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // String!
+    products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    state: string | null; // String
+    updatedAt: NexusGenScalars['Date']; // Date!
+    user: NexusGenRootTypes['User'] | null; // User
+  }
+  OrdersRelayed: { // field return type
+    edges: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    pageInfo: NexusGenRootTypes['PageInfo'] | null; // PageInfo
+  }
+  PageInfo: { // field return type
+    currentPage: number; // Int!
+    endCursor: number; // Int!
+    endPage: number; // Int!
+    hasNextPage: boolean; // Boolean!
+    hasPreviousPage: boolean; // Boolean!
+    startCursor: number; // Int!
+  }
+  Product: { // field return type
+    SKU: string | null; // String
+    category: NexusGenRootTypes['Category'] | null; // Category
+    createdAt: NexusGenScalars['Date']; // Date!
+    description: string | null; // String
+    id: string; // String!
     name: string | null; // String
+    orders: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    price: number | null; // Int
     updatedAt: NexusGenScalars['Date']; // Date!
   }
+  ProductsRelayed: { // field return type
+    edges: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    pageInfo: NexusGenRootTypes['PageInfo'] | null; // PageInfo
+  }
   Query: { // field return type
-    categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    categories: NexusGenRootTypes['CategoriesRelayed'] | null; // CategoriesRelayed
     categoryById: NexusGenRootTypes['Category'] | null; // Category
     me: NexusGenRootTypes['User'] | null; // User
-    postById: NexusGenRootTypes['Post'] | null; // Post
-    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    orderById: NexusGenRootTypes['Order'] | null; // Order
+    orders: NexusGenRootTypes['OrdersRelayed'] | null; // OrdersRelayed
+    productById: NexusGenRootTypes['Product'] | null; // Product
+    products: NexusGenRootTypes['ProductsRelayed'] | null; // ProductsRelayed
     qcms: NexusGenRootTypes['CmsInfo'] | null; // CmsInfo
     userById: NexusGenRootTypes['User'] | null; // User
-    users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    users: NexusGenRootTypes['UsersRelayed'] | null; // UsersRelayed
   }
   User: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
     email: string; // String!
     id: string; // String!
     name: string | null; // String
+    orders: NexusGenRootTypes['Order'] | null; // Order
     role: NexusGenEnums['Role'] | null; // Role
     updatedAt: NexusGenScalars['Date']; // Date!
+  }
+  UsersRelayed: { // field return type
+    edges: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    pageInfo: NexusGenRootTypes['PageInfo'] | null; // PageInfo
   }
 }
 
@@ -150,11 +227,15 @@ export interface NexusGenFieldTypeNames {
   AuthResponse: { // field return type name
     jwt: 'String'
   }
+  CategoriesRelayed: { // field return type name
+    edges: 'Category'
+    pageInfo: 'PageInfo'
+  }
   Category: { // field return type name
     createdAt: 'Date'
     id: 'String'
     name: 'String'
-    posts: 'Post'
+    products: 'Product'
     updatedAt: 'Date'
   }
   CmsInfo: { // field return type name
@@ -162,43 +243,80 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createCategory: 'Category'
-    createPost: 'Post'
+    createOrder: 'Order'
+    createProduct: 'Product'
     createUser: 'User'
     deleteCategory: 'Category'
-    deletePost: 'Post'
+    deleteOrder: 'Order'
+    deleteProduct: 'Product'
     deleteUser: 'User'
     logInUser: 'AuthResponse'
     logOutUser: 'JSON'
     registerUser: 'AuthResponse'
     updateCategory: 'Category'
-    updatePost: 'Post'
+    updateOrder: 'Order'
+    updateProduct: 'Product'
     updateUser: 'User'
   }
-  Post: { // field return type name
-    categories: 'Category'
-    content: 'String'
+  Order: { // field return type name
     createdAt: 'Date'
     id: 'String'
+    products: 'Product'
+    state: 'String'
+    updatedAt: 'Date'
+    user: 'User'
+  }
+  OrdersRelayed: { // field return type name
+    edges: 'Order'
+    pageInfo: 'PageInfo'
+  }
+  PageInfo: { // field return type name
+    currentPage: 'Int'
+    endCursor: 'Int'
+    endPage: 'Int'
+    hasNextPage: 'Boolean'
+    hasPreviousPage: 'Boolean'
+    startCursor: 'Int'
+  }
+  Product: { // field return type name
+    SKU: 'String'
+    category: 'Category'
+    createdAt: 'Date'
+    description: 'String'
+    id: 'String'
     name: 'String'
+    orders: 'Order'
+    price: 'Int'
     updatedAt: 'Date'
   }
+  ProductsRelayed: { // field return type name
+    edges: 'Product'
+    pageInfo: 'PageInfo'
+  }
   Query: { // field return type name
-    categories: 'Category'
+    categories: 'CategoriesRelayed'
     categoryById: 'Category'
     me: 'User'
-    postById: 'Post'
-    posts: 'Post'
+    orderById: 'Order'
+    orders: 'OrdersRelayed'
+    productById: 'Product'
+    products: 'ProductsRelayed'
     qcms: 'CmsInfo'
     userById: 'User'
-    users: 'User'
+    users: 'UsersRelayed'
   }
   User: { // field return type name
     createdAt: 'Date'
     email: 'String'
     id: 'String'
     name: 'String'
+    orders: 'Order'
     role: 'Role'
     updatedAt: 'Date'
+  }
+  UsersRelayed: { // field return type name
+    edges: 'User'
+    pageInfo: 'PageInfo'
   }
 }
 
@@ -207,7 +325,10 @@ export interface NexusGenArgTypes {
     createCategory: { // args
       data?: NexusGenScalars['JSON'] | null; // JSON
     }
-    createPost: { // args
+    createOrder: { // args
+      data?: NexusGenScalars['JSON'] | null; // JSON
+    }
+    createProduct: { // args
       data?: NexusGenScalars['JSON'] | null; // JSON
     }
     createUser: { // args
@@ -216,7 +337,10 @@ export interface NexusGenArgTypes {
     deleteCategory: { // args
       id: string; // String!
     }
-    deletePost: { // args
+    deleteOrder: { // args
+      id: string; // String!
+    }
+    deleteProduct: { // args
       id: string; // String!
     }
     deleteUser: { // args
@@ -235,7 +359,11 @@ export interface NexusGenArgTypes {
       data?: NexusGenScalars['JSON'] | null; // JSON
       id: string; // String!
     }
-    updatePost: { // args
+    updateOrder: { // args
+      data?: NexusGenScalars['JSON'] | null; // JSON
+      id: string; // String!
+    }
+    updateProduct: { // args
       data?: NexusGenScalars['JSON'] | null; // JSON
       id: string; // String!
     }
@@ -248,23 +376,38 @@ export interface NexusGenArgTypes {
     categories: { // args
       orderBy?: NexusGenScalars['JSON'] | null; // JSON
       skip?: number | null; // Int
-      take?: number | null; // Int
+      take: number | null; // Int
       where?: NexusGenScalars['JSON'] | null; // JSON
     }
     categoryById: { // args
       id: string; // String!
     }
-    postById: { // args
+    orderById: { // args
       id: string; // String!
     }
-    posts: { // args
+    orders: { // args
       orderBy?: NexusGenScalars['JSON'] | null; // JSON
       skip?: number | null; // Int
-      take?: number | null; // Int
+      take: number | null; // Int
+      where?: NexusGenScalars['JSON'] | null; // JSON
+    }
+    productById: { // args
+      id: string; // String!
+    }
+    products: { // args
+      orderBy?: NexusGenScalars['JSON'] | null; // JSON
+      skip?: number | null; // Int
+      take: number | null; // Int
       where?: NexusGenScalars['JSON'] | null; // JSON
     }
     userById: { // args
       id: string; // String!
+    }
+    users: { // args
+      orderBy?: NexusGenScalars['JSON'] | null; // JSON
+      skip?: number | null; // Int
+      take: number | null; // Int
+      where?: NexusGenScalars['JSON'] | null; // JSON
     }
   }
 }

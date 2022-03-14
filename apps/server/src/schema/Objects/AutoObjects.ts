@@ -27,9 +27,7 @@ const buildObjects = (schema: Schema) => {
       definition(t: ObjectBlock<string>) {
         t.nonNull.string('id')
         objectDefinition.fields.map((field) => getFieldDefinition(t, field))
-        // @ts-ignore
         t.nonNull.date('createdAt')
-        // @ts-ignore
         t.nonNull.date('updatedAt')
       }
     })
