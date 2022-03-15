@@ -5,5 +5,6 @@ postgres-data
 prisma/schema.prisma
 src/schema.graphql
 src/schema/generated
+dist/schema/generated
 /coverage
 /qcms.config.js
