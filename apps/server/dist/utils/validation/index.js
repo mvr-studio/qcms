@@ -5,9 +5,8 @@ const zod_1 = require("zod");
 const buildFieldsValidation = (objectDefinition) => {
     const fieldsValidation = {};
     objectDefinition.fields.forEach((field) => {
-        if (field.validationSchema) {
-            fieldsValidation[field.name] = field.validationSchema(zod_1.z) || zod_1.z.any();
-        }
+        fieldsValidation[field.name] =
+            (field.validationSchema && field.validationSchema(zod_1.z)) || zod_1.z.any();
     });
     return fieldsValidation;
 };
