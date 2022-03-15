@@ -1,13 +1,13 @@
 {
   "name": "@mvr-studio/qcms",
   "author": "Tomasz Marciniak <tomek@mvr.studio>",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "local:build": "yarn clear:dist && tsc && tsc-alias",
+    "build": "yarn clear:dist && tsc && tsc-alias",
+    "dev": "yarn local:build && nodemon -e ts -x \"tsc && tsc-alias && micro-dev --cold ./dist\"",
     "local:start": "micro -l tcp://0.0.0.0:${QCMS_PORT-3050} ./dist",
-    "local:dev": "yarn local:build && nodemon -e ts -x \"tsc && tsc-alias && micro-dev --cold ./dist\"",
     "local:studio": "npx prisma studio",
     "generate:nexus": "ts-node --transpile-only src/schema",
     "generate:copydist": "cp -r ./src/prisma ./dist",

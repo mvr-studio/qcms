@@ -38,7 +38,8 @@ const setAuthCookie = ({ context, signedJWT }) => {
         value: `Bearer ${signedJWT}`,
         options: {
             expires: (0, dayjs_1.default)().add(7, 'days').toDate(),
-            httpOnly: true
+            httpOnly: true,
+            sameSite: 'none'
         }
     });
 };
@@ -48,7 +49,8 @@ const unsetAuthCookie = ({ context }) => {
         name: constants_1.AUTH_COOKIE_NAME,
         value: '',
         options: {
-            httpOnly: true
+            httpOnly: true,
+            sameSite: 'none'
         }
     });
 };

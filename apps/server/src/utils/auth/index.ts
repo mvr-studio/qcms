@@ -45,7 +45,8 @@ export const setAuthCookie = ({ context, signedJWT }: SetAuthCookieProps) => {
     value: `Bearer ${signedJWT}`,
     options: {
       expires: dayjs().add(7, 'days').toDate(),
-      httpOnly: true
+      httpOnly: true,
+      sameSite: 'none'
     }
   })
 }
@@ -57,7 +58,8 @@ export const unsetAuthCookie = ({
     name: AUTH_COOKIE_NAME,
     value: '',
     options: {
-      httpOnly: true
+      httpOnly: true,
+      sameSite: 'none'
     }
   })
 }
