@@ -3,6 +3,7 @@ node_modules
 .env
 postgres-data
 prisma/schema.prisma
-server/schema.graphql
+src/schema.graphql
+src/schema/generated
 /coverage
 /qcms.config.js
