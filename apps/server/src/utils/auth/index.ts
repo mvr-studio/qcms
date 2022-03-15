@@ -46,7 +46,8 @@ export const setAuthCookie = ({ context, signedJWT }: SetAuthCookieProps) => {
     options: {
       expires: dayjs().add(7, 'days').toDate(),
       httpOnly: true,
-      sameSite: 'none'
+      sameSite: 'none',
+      secure: true
     }
   })
 }
@@ -59,7 +60,8 @@ export const unsetAuthCookie = ({
     value: '',
     options: {
       httpOnly: true,
-      sameSite: 'none'
+      sameSite: 'none',
+      secure: true
     }
   })
 }
