@@ -5,7 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config();
-const cors = require('micro-cors')({ origin: 'http://localhost:3050' });
+const cors = require('micro-cors')({
+    origin: process.env.QCMS_CORS_ORIGIN || 'http://localhost:3050'
+});
 const apollo_server_micro_1 = require("apollo-server-micro");
 const micro_1 = require("micro");
 const apollo_server_core_1 = require("apollo-server-core");

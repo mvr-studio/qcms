@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
-const cors = require('micro-cors')({ origin: 'http://localhost:3050' })
+const cors = require('micro-cors')({
+  origin: process.env.QCMS_CORS_ORIGIN || 'http://localhost:3050'
+})
 import { ApolloServer } from 'apollo-server-micro'
 import { send } from 'micro'
 import {
