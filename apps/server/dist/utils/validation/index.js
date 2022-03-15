@@ -6,7 +6,7 @@ const buildFieldsValidation = (objectDefinition) => {
     const fieldsValidation = {};
     objectDefinition.fields.forEach((field) => {
         if (field.validationSchema) {
-            fieldsValidation[field.name] = field.validationSchema(zod_1.z);
+            fieldsValidation[field.name] = field.validationSchema(zod_1.z) || zod_1.z.any();
         }
     });
     return fieldsValidation;
