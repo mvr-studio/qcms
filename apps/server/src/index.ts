@@ -14,6 +14,7 @@ import { context } from './context'
 import { ZodError } from 'zod'
 import httpHeadersPlugin from 'apollo-server-plugin-http-headers'
 import cookieParse from 'micro-cookie'
+import { VercelRequest, VercelResponse } from '@vercel/node'
 
 const apolloServer = new ApolloServer({
   schema: schema as any,
@@ -32,11 +33,16 @@ const apolloServer = new ApolloServer({
     return error
   }
 })
-module.exports = apolloServer.start().then(() => {
-  const handler = apolloServer.createHandler()
-  return cors(
-    cookieParse((req: any, res: any) =>
-      req.method === 'OPTIONS' ? send(res, 200, 'ok') : handler(req, res)
+const startServer = apolloServer.start()
+export const handler = async (req: VercelRequest, res: VercelResponse) => {
+  await startServer
+  const apolloHandler = await apolloServer.createHandler({
+    path: process.env.QCMS_PATH || '/api/graphql'
+  })
+  await cors(
+    cookieParse((req: VercelRequest, res: VercelResponse) =>
+      req.method === 'OPTIONS' ? send(res, 200, 'ok') : apolloHandler(req, res)
     )
-  )
-})
+  )(req, res)
+}
+module.exports = handler
