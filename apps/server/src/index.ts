@@ -34,15 +34,21 @@ const apolloServer = new ApolloServer({
   }
 })
 const startServer = apolloServer.start()
-export const handler = async (req: VercelRequest, res: VercelResponse) => {
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   await startServer
   const apolloHandler = await apolloServer.createHandler({
     path: process.env.QCMS_PATH || '/api/graphql'
   })
   await cors(
-    cookieParse((req: VercelRequest, res: VercelResponse) =>
-      req.method === 'OPTIONS' ? send(res, 200, 'ok') : apolloHandler(req, res)
+    cookieParse(
+      ((req: VercelRequest, res: VercelResponse) => {
+        req.method === 'OPTIONS'
+          ? send(res, 200, 'ok')
+          : apolloHandler(req, res)
+      })(req, res)
     )
-  )(req, res)
+  )
 }
+
 module.exports = handler
