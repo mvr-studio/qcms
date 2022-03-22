@@ -11,7 +11,7 @@ const User = objectType({
     t.nonNull.string('email')
     t.field('role', { type: 'Role' })
     getUserRelations().map(([objectName]) => {
-      t.field(pluralize(objectName), { type: capitalize(objectName) })
+      t.list.field(pluralize(objectName), { type: capitalize(objectName) })
     })
     t.nonNull.date('createdAt')
     t.nonNull.date('updatedAt')

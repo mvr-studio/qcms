@@ -15,7 +15,7 @@ const User = (0, nexus_1.objectType)({
         t.nonNull.string('email');
         t.field('role', { type: 'Role' });
         (0, prismaSchema_1.getUserRelations)().map(([objectName]) => {
-            t.field((0, pluralize_1.default)(objectName), { type: (0, capitalize_1.default)(objectName) });
+            t.list.field((0, pluralize_1.default)(objectName), { type: (0, capitalize_1.default)(objectName) });
         });
         t.nonNull.date('createdAt');
         t.nonNull.date('updatedAt');
