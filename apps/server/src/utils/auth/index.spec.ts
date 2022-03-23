@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { resolvePermissions } from '.'
 
 test('resolves boolean permission', () => {
@@ -6,14 +7,30 @@ test('resolves boolean permission', () => {
 })
 
 test('resolves functional permission', () => {
-  const truthyPermissio = resolvePermissions({
-    permissionsResolver: ({ user }: any) => user.id === 1,
-    user: { id: 1 }
+  const truthyPermission = resolvePermissions({
+    permissionsResolver: ({ user }: any) => user.id === '1x',
+    user: {
+      name: 'Johnny',
+      email: 'johnny@cash.io',
+      passwordDigest: '1xxx1',
+      id: '1x',
+      role: 'USER',
+      createdAt: dayjs().toDate(),
+      updatedAt: dayjs().toDate()
+    }
   })
-  expect(truthyPermissio).toBeTruthy()
+  expect(truthyPermission).toBeTruthy()
   const falsyPermission = resolvePermissions({
-    permissionsResolver: ({ user }: any) => user.id === 2,
-    user: { id: 1 }
+    permissionsResolver: ({ user }: any) => user.id === 'anythingelse1',
+    user: {
+      name: 'Johnny',
+      email: 'johnny@cash.io',
+      passwordDigest: '1xxx1',
+      id: '1x',
+      role: 'USER',
+      createdAt: dayjs().toDate(),
+      updatedAt: dayjs().toDate()
+    }
   })
   expect(falsyPermission).toBeFalsy()
 })

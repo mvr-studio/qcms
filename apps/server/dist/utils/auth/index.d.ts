@@ -1,6 +1,14 @@
 import { Context } from '../../context';
+import { User } from '@prisma/client';
+import { Maybe } from 'nexus/dist/core';
+import { PermissionsResolverArgs } from '../../types';
 export declare const decodeToken: (authHeader: string) => Record<string, string | number> | null;
-export declare const resolvePermissions: ({ permissionsResolver, entity, user }: any) => any;
+interface ResolvePermissionsProps {
+    permissionsResolver: boolean | ((args: PermissionsResolverArgs) => any);
+    entity?: Record<string, any>;
+    user?: Maybe<User>;
+}
+export declare const resolvePermissions: ({ permissionsResolver, entity, user }: ResolvePermissionsProps) => boolean;
 export declare const getSignedJWT: (data: Record<string, any>) => string;
 interface SetAuthCookieProps {
     context: Context;

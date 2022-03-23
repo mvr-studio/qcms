@@ -24,7 +24,7 @@ const resolvePermissions = ({ permissionsResolver, entity, user }) => {
         case 'boolean':
             return permissionsResolver;
         case 'function':
-            return permissionsResolver({ user, entity });
+            return Boolean(permissionsResolver({ user, entity }));
     }
 };
 exports.resolvePermissions = resolvePermissions;

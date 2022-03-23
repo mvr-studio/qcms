@@ -1,4 +1,5 @@
-import type { ObjectDefinitionBlock } from 'nexus/dist/core'
+import { User } from '@prisma/client'
+import type { Maybe, ObjectDefinitionBlock } from 'nexus/dist/core'
 import { z, ZodFirstPartySchemaTypes } from 'zod'
 
 type ValidationSchemaZ = typeof z
@@ -25,12 +26,17 @@ export type EntityField = {
   validationSchema?: (z: ValidationSchemaZ) => ZodFirstPartySchemaTypes
 }
 
+export type PermissionsResolverArgs = {
+  user?: Maybe<User>
+  entity?: Record<string, any>
+}
+
 type PermissionResolver = boolean
 type PermissionResolverWithUser =
-  | ((user: Record<string, any>) => boolean)
+  | ((args: PermissionsResolverArgs) => boolean)
   | PermissionResolver
 type PermissionResolverWithEntity =
-  | ((entity: Record<string, any>, user: Record<string, any>) => boolean)
+  | ((args: PermissionsResolverArgs) => boolean)
   | PermissionResolver
 
 type EntityPermissions = {

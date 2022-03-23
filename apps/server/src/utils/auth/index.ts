@@ -2,6 +2,9 @@ import jwt from 'jsonwebtoken'
 import dayjs from 'dayjs'
 import { AUTH_COOKIE_NAME } from '../../constants'
 import { Context } from '../../context'
+import { User } from '@prisma/client'
+import { Maybe } from 'nexus/dist/core'
+import { PermissionsResolverArgs } from '../../types'
 
 export const decodeToken = (authHeader: string) => {
   const jwtToken = authHeader.replace('Bearer ', '')
@@ -16,16 +19,22 @@ export const decodeToken = (authHeader: string) => {
   return null
 }
 
+interface ResolvePermissionsProps {
+  permissionsResolver: boolean | ((args: PermissionsResolverArgs) => any)
+  entity?: Record<string, any>
+  user?: Maybe<User>
+}
+
 export const resolvePermissions = ({
   permissionsResolver,
   entity,
   user
-}: any) => {
+}: ResolvePermissionsProps) => {
   switch (typeof permissionsResolver) {
     case 'boolean':
       return permissionsResolver
     case 'function':
-      return permissionsResolver({ user, entity })
+      return Boolean(permissionsResolver({ user, entity }))
   }
 }
 
