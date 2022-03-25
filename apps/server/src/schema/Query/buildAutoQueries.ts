@@ -57,7 +57,11 @@ const autoFindAllQuery = ({
       const prismaObject = (context.prisma as any)?.[objectName]
       const objectsCount = await prismaObject.count()
       const edges = await prismaObject.findMany({
-        where: args.where,
+        where: {
+          ...args.where,
+          ...(objectDefinition.whereExtension &&
+            objectDefinition.whereExtension({ user: context.user }))
+        },
         orderBy: args.orderBy,
         skip: args.skip,
         take: args.take,
@@ -108,7 +112,9 @@ const autoFindOneQuery = ({
       const prismaObject = (context.prisma as any)?.[objectName]
       return prismaObject.findUnique({
         where: {
-          id: args.id
+          id: args.id,
+          ...(objectDefinition.whereExtension &&
+            objectDefinition.whereExtension({ user: context.user }))
         },
         include: getRelations(objectDefinition)
       })

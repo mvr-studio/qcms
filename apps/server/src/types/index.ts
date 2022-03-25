@@ -31,6 +31,10 @@ export type PermissionsResolverArgs = {
   entity?: Record<string, any>
 }
 
+export type WhereExtensionArgs = {
+  user?: Maybe<User>
+}
+
 type PermissionResolver = boolean
 type PermissionResolverWithUser =
   | ((args: PermissionsResolverArgs) => boolean)
@@ -50,6 +54,7 @@ type EntityPermissions = {
 export type ConfigEntity = {
   fields: EntityField[]
   permissions?: EntityPermissions
+  whereExtension?: (args: WhereExtensionArgs) => any
 }
 
 export type Schema = Record<string, ConfigEntity>
