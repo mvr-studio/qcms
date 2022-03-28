@@ -1,6 +1,6 @@
-import { User } from '@prisma/client';
 import type { Maybe, ObjectDefinitionBlock } from 'nexus/dist/core';
 import { z, ZodFirstPartySchemaTypes } from 'zod';
+declare type User = Record<string, any>;
 declare type ValidationSchemaZ = typeof z;
 export declare type ObjectBlock<T extends string> = ObjectDefinitionBlock<T>;
 export declare type QueryBlock = ObjectDefinitionBlock<'Query'>;
@@ -24,6 +24,9 @@ export declare type PermissionsResolverArgs = {
     user?: Maybe<User>;
     entity?: Record<string, any>;
 };
+export declare type WhereExtensionArgs = {
+    user?: Maybe<User>;
+};
 declare type PermissionResolver = boolean;
 declare type PermissionResolverWithUser = ((args: PermissionsResolverArgs) => boolean) | PermissionResolver;
 declare type PermissionResolverWithEntity = ((args: PermissionsResolverArgs) => boolean) | PermissionResolver;
@@ -37,6 +40,7 @@ declare type EntityPermissions = {
 export declare type ConfigEntity = {
     fields: EntityField[];
     permissions?: EntityPermissions;
+    whereExtension?: (args: WhereExtensionArgs) => any;
 };
 export declare type Schema = Record<string, ConfigEntity>;
 export interface QcmsConfig {

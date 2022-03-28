@@ -19,9 +19,7 @@ const context = ({ req }) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     let user = null;
     const authHeader = ((_a = req.cookies) === null || _a === void 0 ? void 0 : _a['Q-AUTHENTICATION']) || req.headers.authorization;
-    const session = (authHeader &&
-        authHeader !== 'null' &&
-        (0, auth_1.decodeToken)(authHeader)) || { data: null };
+    const session = (authHeader && authHeader !== 'null' && (0, auth_1.decodeToken)(authHeader)) || { data: null };
     try {
         user =
             ((session === null || session === void 0 ? void 0 : session.data) &&

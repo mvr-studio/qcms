@@ -1,7 +1,7 @@
 import { Context } from '../../context';
-import { User } from '@prisma/client';
 import { Maybe } from 'nexus/dist/core';
 import { PermissionsResolverArgs } from '../../types';
+declare type User = Record<string, any>;
 export declare const decodeToken: (authHeader: string) => Record<string, string | number> | null;
 interface ResolvePermissionsProps {
     permissionsResolver: boolean | ((args: PermissionsResolverArgs) => any);

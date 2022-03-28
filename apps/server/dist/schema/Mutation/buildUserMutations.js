@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const nexus_1 = require("nexus");
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const constants_1 = require("../../constants");
 const auth_1 = require("../../utils/auth");
 const logInUser = (t) => {
@@ -32,7 +32,7 @@ const logInUser = (t) => {
                 });
                 if (!user)
                     throw new Error('Unable to log in');
-                const isMatching = bcrypt_1.default.compareSync(args.password, (user === null || user === void 0 ? void 0 : user.passwordDigest) || '');
+                const isMatching = bcryptjs_1.default.compareSync(args.password, (user === null || user === void 0 ? void 0 : user.passwordDigest) || '');
                 if (!isMatching)
                     throw new Error('Unable to log in');
                 const signedJWT = (0, auth_1.getSignedJWT)(user);
@@ -68,7 +68,7 @@ const registerUser = (t) => {
                 const newUser = yield context.prisma.user.create({
                     data: {
                         email: args.email,
-                        passwordDigest: bcrypt_1.default.hashSync(args.password, 3),
+                        passwordDigest: bcryptjs_1.default.hashSync(args.password, 3),
                         name: args.name
                     }
                 });

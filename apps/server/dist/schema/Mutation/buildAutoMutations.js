@@ -41,7 +41,9 @@ const autoCreateMutation = ({ t, objectName, objectDefinition }) => {
             const dataValidation = zod_1.z.object(fieldsValidation);
             const prismaObject = (_a = context.prisma) === null || _a === void 0 ? void 0 : _a[objectName];
             return prismaObject.create({
-                data: dataValidation.parse(args.data)
+                data: dataValidation.parse(args.data),
+                where: objectDefinition.whereExtension &&
+                    objectDefinition.whereExtension({ user: context.user })
             });
         }
     });
@@ -61,9 +63,8 @@ const autoUpdateMutation = ({ t, objectName, objectDefinition }) => {
                     return true;
                 const prismaObject = (_b = context.prisma) === null || _b === void 0 ? void 0 : _b[objectName];
                 const entity = yield prismaObject.findUnique({
-                    where: {
-                        id: args.id
-                    }
+                    where: Object.assign({ id: args.id }, (objectDefinition.whereExtension &&
+                        objectDefinition.whereExtension({ user: context.user })))
                 });
                 return (0, auth_1.resolvePermissions)({
                     permissionsResolver: (_c = objectDefinition.permissions) === null || _c === void 0 ? void 0 : _c.update,
@@ -100,9 +101,8 @@ const autoDeleteMutation = ({ t, objectName, objectDefinition }) => {
                     return true;
                 const prismaObject = (_b = context.prisma) === null || _b === void 0 ? void 0 : _b[objectName];
                 const entity = yield prismaObject.findUnique({
-                    where: {
-                        id: args.id
-                    }
+                    where: Object.assign({ id: args.id }, (objectDefinition.whereExtension &&
+                        objectDefinition.whereExtension({ user: context.user })))
                 });
                 return (0, auth_1.resolvePermissions)({
                     permissionsResolver: (_c = objectDefinition.permissions) === null || _c === void 0 ? void 0 : _c.delete,

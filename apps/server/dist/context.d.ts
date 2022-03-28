@@ -1,6 +1,7 @@
-import type { PrismaClient, User } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import { VercelRequest } from '@vercel/node';
 import { Maybe } from 'nexus/dist/core';
+declare type User = Record<string, any>;
 export interface Context {
     prisma: PrismaClient;
     session: {

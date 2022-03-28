@@ -2,17 +2,15 @@ import jwt from 'jsonwebtoken'
 import dayjs from 'dayjs'
 import { AUTH_COOKIE_NAME } from '../../constants'
 import { Context } from '../../context'
-import { User } from '@prisma/client'
 import { Maybe } from 'nexus/dist/core'
 import { PermissionsResolverArgs } from '../../types'
+
+type User = Record<string, any>
 
 export const decodeToken = (authHeader: string) => {
   const jwtToken = authHeader.replace('Bearer ', '')
   if (!jwtToken) return null
-  const decodedUser = jwt.verify(
-    jwtToken,
-    process.env.QCMS_JWT_SECRET || 'sadge'
-  ) as Record<string, string | number>
+  const decodedUser = jwt.verify(jwtToken, process.env.QCMS_JWT_SECRET || 'sadge') as Record<string, string | number>
   const exp = decodedUser.exp as number
   const expirationDate = dayjs(exp * 1000)
   if (dayjs().isBefore(expirationDate)) return decodedUser
@@ -25,11 +23,7 @@ interface ResolvePermissionsProps {
   user?: Maybe<User>
 }
 
-export const resolvePermissions = ({
-  permissionsResolver,
-  entity,
-  user
-}: ResolvePermissionsProps) => {
+export const resolvePermissions = ({ permissionsResolver, entity, user }: ResolvePermissionsProps) => {
   switch (typeof permissionsResolver) {
     case 'boolean':
       return permissionsResolver
@@ -61,9 +55,7 @@ export const setAuthCookie = ({ context, signedJWT }: SetAuthCookieProps) => {
   })
 }
 
-export const unsetAuthCookie = ({
-  context
-}: Omit<SetAuthCookieProps, 'signedJWT'>) => {
+export const unsetAuthCookie = ({ context }: Omit<SetAuthCookieProps, 'signedJWT'>) => {
   return context.setCookies.push({
     name: AUTH_COOKIE_NAME,
     value: '',

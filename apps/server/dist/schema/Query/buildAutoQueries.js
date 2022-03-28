@@ -64,7 +64,8 @@ const autoFindAllQuery = ({ t, objectName, objectDefinition }) => {
                 const prismaObject = (_a = context.prisma) === null || _a === void 0 ? void 0 : _a[objectName];
                 const objectsCount = yield prismaObject.count();
                 const edges = yield prismaObject.findMany({
-                    where: args.where,
+                    where: Object.assign(Object.assign({}, args.where), (objectDefinition.whereExtension &&
+                        objectDefinition.whereExtension({ user: context.user }))),
                     orderBy: args.orderBy,
                     skip: args.skip,
                     take: args.take,
@@ -115,9 +116,8 @@ const autoFindOneQuery = ({ t, objectName, objectDefinition }) => {
             var _a;
             const prismaObject = (_a = context.prisma) === null || _a === void 0 ? void 0 : _a[objectName];
             return prismaObject.findUnique({
-                where: {
-                    id: args.id
-                },
+                where: Object.assign({ id: args.id }, (objectDefinition.whereExtension &&
+                    objectDefinition.whereExtension({ user: context.user }))),
                 include: getRelations(objectDefinition)
             });
         }

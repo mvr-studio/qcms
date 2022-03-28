@@ -1,6 +1,6 @@
 import { arg, nonNull, stringArg } from 'nexus'
 import { MutationBlock } from '../../types'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { USER_ROLES } from '../../constants'
 import { getSignedJWT, setAuthCookie, unsetAuthCookie } from '../../utils/auth'
 
@@ -18,10 +18,7 @@ const logInUser = (t: MutationBlock) => {
         }
       })
       if (!user) throw new Error('Unable to log in')
-      const isMatching = bcrypt.compareSync(
-        args.password,
-        user?.passwordDigest || ''
-      )
+      const isMatching = bcrypt.compareSync(args.password, user?.passwordDigest || '')
       if (!isMatching) throw new Error('Unable to log in')
       const signedJWT = getSignedJWT(user)
       setAuthCookie({ context, signedJWT })
