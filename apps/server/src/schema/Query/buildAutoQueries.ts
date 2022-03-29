@@ -9,24 +9,15 @@ import { getOperationsNames } from '../../utils/operations'
 
 const schema = config.schema
 
-const getRelations = (
-  objectDefinition: AutoBlock<QueryBlock>['objectDefinition']
-) => {
+const getRelations = (objectDefinition: AutoBlock<QueryBlock>['objectDefinition']) => {
   return Object.fromEntries(
     objectDefinition.fields
       .filter((field) => field.model)
-      .map((field) => [
-        field.relation === 'belongsTo' ? field.name : pluralize(field.name),
-        true
-      ])
+      .map((field) => [field.relation === 'belongsTo' ? field.name : pluralize(field.name), true])
   )
 }
 
-const autoFindAllQuery = ({
-  t,
-  objectName,
-  objectDefinition
-}: AutoBlock<QueryBlock>) => {
+const autoFindAllQuery = ({ t, objectName, objectDefinition }: AutoBlock<QueryBlock>) => {
   const LIST_LENGTH = 10
   const ObjectRelayed = objectType({
     name: `${capitalize(pluralize(objectName))}Relayed`,
@@ -59,8 +50,7 @@ const autoFindAllQuery = ({
       const edges = await prismaObject.findMany({
         where: {
           ...args.where,
-          ...(objectDefinition.whereExtension &&
-            objectDefinition.whereExtension({ user: context.user }))
+          ...(objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user }))
         },
         orderBy: args.orderBy,
         skip: args.skip,
@@ -83,11 +73,7 @@ const autoFindAllQuery = ({
   })
 }
 
-const autoFindOneQuery = ({
-  t,
-  objectName,
-  objectDefinition
-}: AutoBlock<QueryBlock>) => {
+const autoFindOneQuery = ({ t, objectName, objectDefinition }: AutoBlock<QueryBlock>) => {
   const FIND_ONE_NAME = getOperationsNames(objectName).findOne
   t.nullable.field(FIND_ONE_NAME, {
     type: capitalize(objectName) as any,
@@ -110,11 +96,10 @@ const autoFindOneQuery = ({
     },
     resolve(_parents, args, context: Context) {
       const prismaObject = (context.prisma as any)?.[objectName]
-      return prismaObject.findUnique({
+      return prismaObject.findFirst({
         where: {
           id: args.id,
-          ...(objectDefinition.whereExtension &&
-            objectDefinition.whereExtension({ user: context.user }))
+          ...(objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user }))
         },
         include: getRelations(objectDefinition)
       })

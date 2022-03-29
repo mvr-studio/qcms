@@ -42,8 +42,7 @@ const autoCreateMutation = ({ t, objectName, objectDefinition }) => {
             const prismaObject = (_a = context.prisma) === null || _a === void 0 ? void 0 : _a[objectName];
             return prismaObject.create({
                 data: dataValidation.parse(args.data),
-                where: objectDefinition.whereExtension &&
-                    objectDefinition.whereExtension({ user: context.user })
+                where: objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user })
             });
         }
     });
@@ -62,9 +61,8 @@ const autoUpdateMutation = ({ t, objectName, objectDefinition }) => {
                 if (!((_a = objectDefinition.permissions) === null || _a === void 0 ? void 0 : _a.update))
                     return true;
                 const prismaObject = (_b = context.prisma) === null || _b === void 0 ? void 0 : _b[objectName];
-                const entity = yield prismaObject.findUnique({
-                    where: Object.assign({ id: args.id }, (objectDefinition.whereExtension &&
-                        objectDefinition.whereExtension({ user: context.user })))
+                const entity = yield prismaObject.findFirst({
+                    where: Object.assign({ id: args.id }, (objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user })))
                 });
                 return (0, auth_1.resolvePermissions)({
                     permissionsResolver: (_c = objectDefinition.permissions) === null || _c === void 0 ? void 0 : _c.update,
@@ -101,8 +99,7 @@ const autoDeleteMutation = ({ t, objectName, objectDefinition }) => {
                     return true;
                 const prismaObject = (_b = context.prisma) === null || _b === void 0 ? void 0 : _b[objectName];
                 const entity = yield prismaObject.findUnique({
-                    where: Object.assign({ id: args.id }, (objectDefinition.whereExtension &&
-                        objectDefinition.whereExtension({ user: context.user })))
+                    where: Object.assign({ id: args.id }, (objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user })))
                 });
                 return (0, auth_1.resolvePermissions)({
                     permissionsResolver: (_c = objectDefinition.permissions) === null || _c === void 0 ? void 0 : _c.delete,

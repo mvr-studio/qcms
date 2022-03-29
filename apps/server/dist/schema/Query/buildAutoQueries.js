@@ -22,10 +22,7 @@ const schema = config_1.default.schema;
 const getRelations = (objectDefinition) => {
     return Object.fromEntries(objectDefinition.fields
         .filter((field) => field.model)
-        .map((field) => [
-        field.relation === 'belongsTo' ? field.name : (0, pluralize_1.default)(field.name),
-        true
-    ]));
+        .map((field) => [field.relation === 'belongsTo' ? field.name : (0, pluralize_1.default)(field.name), true]));
 };
 const autoFindAllQuery = ({ t, objectName, objectDefinition }) => {
     const LIST_LENGTH = 10;
@@ -64,8 +61,7 @@ const autoFindAllQuery = ({ t, objectName, objectDefinition }) => {
                 const prismaObject = (_a = context.prisma) === null || _a === void 0 ? void 0 : _a[objectName];
                 const objectsCount = yield prismaObject.count();
                 const edges = yield prismaObject.findMany({
-                    where: Object.assign(Object.assign({}, args.where), (objectDefinition.whereExtension &&
-                        objectDefinition.whereExtension({ user: context.user }))),
+                    where: Object.assign(Object.assign({}, args.where), (objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user }))),
                     orderBy: args.orderBy,
                     skip: args.skip,
                     take: args.take,
@@ -115,9 +111,8 @@ const autoFindOneQuery = ({ t, objectName, objectDefinition }) => {
         resolve(_parents, args, context) {
             var _a;
             const prismaObject = (_a = context.prisma) === null || _a === void 0 ? void 0 : _a[objectName];
-            return prismaObject.findUnique({
-                where: Object.assign({ id: args.id }, (objectDefinition.whereExtension &&
-                    objectDefinition.whereExtension({ user: context.user }))),
+            return prismaObject.findFirst({
+                where: Object.assign({ id: args.id }, (objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user }))),
                 include: getRelations(objectDefinition)
             });
         }

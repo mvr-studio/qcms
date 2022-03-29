@@ -28,9 +28,7 @@ const autoCreateMutation = ({ t, objectName, objectDefinition }: AutoBlock) => {
       const prismaObject = (context.prisma as any)?.[objectName]
       return prismaObject.create({
         data: dataValidation.parse(args.data),
-        where:
-          objectDefinition.whereExtension &&
-          objectDefinition.whereExtension({ user: context.user })
+        where: objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user })
       })
     }
   })
@@ -47,11 +45,10 @@ const autoUpdateMutation = ({ t, objectName, objectDefinition }: AutoBlock) => {
     async authorize(_parents, args, context: Context) {
       if (!objectDefinition.permissions?.update) return true
       const prismaObject = (context.prisma as any)?.[objectName]
-      const entity = await prismaObject.findUnique({
+      const entity = await prismaObject.findFirst({
         where: {
           id: args.id,
-          ...(objectDefinition.whereExtension &&
-            objectDefinition.whereExtension({ user: context.user }))
+          ...(objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user }))
         }
       })
       return resolvePermissions({
@@ -87,8 +84,7 @@ const autoDeleteMutation = ({ t, objectName, objectDefinition }: AutoBlock) => {
       const entity = await prismaObject.findUnique({
         where: {
           id: args.id,
-          ...(objectDefinition.whereExtension &&
-            objectDefinition.whereExtension({ user: context.user }))
+          ...(objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user }))
         }
       })
       return resolvePermissions({
