@@ -27,8 +27,7 @@ const autoCreateMutation = ({ t, objectName, objectDefinition }: AutoBlock) => {
       const dataValidation = z.object(fieldsValidation)
       const prismaObject = (context.prisma as any)?.[objectName]
       return prismaObject.create({
-        data: dataValidation.parse(args.data),
-        where: objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user })
+        data: dataValidation.parse(args.data)
       })
     }
   })

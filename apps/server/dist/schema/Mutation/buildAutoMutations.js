@@ -41,8 +41,7 @@ const autoCreateMutation = ({ t, objectName, objectDefinition }) => {
             const dataValidation = zod_1.z.object(fieldsValidation);
             const prismaObject = (_a = context.prisma) === null || _a === void 0 ? void 0 : _a[objectName];
             return prismaObject.create({
-                data: dataValidation.parse(args.data),
-                where: objectDefinition.whereExtension && objectDefinition.whereExtension({ user: context.user })
+                data: dataValidation.parse(args.data)
             });
         }
     });

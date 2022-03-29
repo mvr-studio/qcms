@@ -1,7 +1,7 @@
 {
   "name": "@mvr-studio/qcms",
   "author": "Tomasz Marciniak <tomek@mvr.studio>",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
